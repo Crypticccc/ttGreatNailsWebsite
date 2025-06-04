@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Great Nails & Hair Booking</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function () {
+      let step = 1;
+      const services = ["Nail", "Hair", "Facial", "Massage", "Microblading", "Eyelash", "Waxing"];
+      const staffData = [
+        { name: "Natalie", specialties: ["Eyelash", "Nail", "Waxing"] },
+        { name: "Leyna", specialties: ["Wax", "Hair", "Facial", "Massage", "Eyelash"] },
+        { name: "Tracy", specialties: ["Nail", "Hair", "Wax"] },
+        { name: "Vicky", specialties: ["Nail"] },
+        { name: "Kim", specialties: ["Nail"] },
+        { name: "Ivy", specialties: ["Hair"] },
+        { name: "Janet", specialties: ["Facial", "Microblading", "Hair"] },
+        { name: "Lee", specialties: ["Nail", "Pedicure"] },
+        { name: "Ava", specialties: ["Hair", "Waxing"] },
+        { name: "Tiffany", specialties: ["Nail"] },
+      ];
+
+      const app = document.getElementById('app');
+      let selectedServices = [];
+      let selectedTime = '';
+      let selectedStaff = '';
+      let phone = '';
+      let date = new Date().toISOString().split('T')[0];
+
+      function render() {
+        if (step === 1) {
+          app.innerHTML = `
+            <h1 class="text-2xl font-bold">Great Nails & Hair</h1>
+            <p class="mb-4">440 Great Mall Dr Milpitas, Entrance #5</p>
+            <h2 class="font-semibold mb-2">What type of service do you want?</h2>
+            <p class="text-sm mb-2">You can select multiple options</p>
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              ${services.map(service => `
+                <label><input type="checkbox" value="${service}" class="service"> ${service}</label>
+              `).join('')}
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2" id="next">OK</button>
+          `;
+          document.querySelectorAll('.service').forEach(cb => {
+            cb.addEventListener('change', e => {
+              if (e.target.checked) selectedServices.push(e.target.value);
+              else selectedServices = selectedServices.filter(s => s !== e.target.value);
+            });
+          });
+          document.getElementById('next').onclick = () => { step++; render(); };
+        } else if (step === 2) {
+          const times = Array.from({ length: 24 }, (_, i) => `${9 + Math.floor(i / 2)}:${i % 2 === 0 ? '00' : '30'}`);
+          app.innerHTML = `
+            <h2 class="font-semibold mb-2">Choose a date and time</h2>
+            <input type="date" value="${date}" class="mb-4" id="date" />
+            <div class="grid grid-cols-3 gap-2 mb-4">
+              ${times.map(t => `<button class="border px-2 py-1" data-time="${t}">${t}</button>`).join('')}
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2" id="next">OK</button>
+          `;
+          document.querySelectorAll('[data-time]').forEach(btn => {
+            btn.onclick = () => {
+              selectedTime = btn.dataset.time;
+              render();
+            }
+          });
+          document.getElementById('date').onchange = (e) => date = e.target.value;
+          document.getElementById('next').onclick = () => { step++; render(); };
+        } else if (step === 3) {
+          const staffList = staffData.filter(s => selectedServices.some(svc => s.specialties.includes(svc)));
+          app.innerHTML = `
+            <h2 class="font-semibold mb-2">Select Staff</h2>
+            <div class="space-y-2 mb-4">
+              ${staffList.map(s => `<button class="block border px-4 py-2 w-full" data-staff="${s.name}">${s.name} – ${s.specialties.join(', ')}</button>`).join('')}
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2" id="next">Confirm</button>
+          `;
+          document.querySelectorAll('[data-staff]').forEach(btn => {
+            btn.onclick = () => {
+              selectedStaff = btn.dataset.staff;
+              render();
+            }
+          });
+          document.getElementById('next').onclick = () => { step++; render(); };
+        } else if (step === 4) {
+          app.innerHTML = `
+            <h2 class="font-semibold mb-2">Enter your phone number</h2>
+            <input type="tel" id="phone" placeholder="(xxx) xxx-xxxx" class="border px-2 py-1 w-full mb-4" />
+            <button class="bg-blue-500 text-white px-4 py-2" id="submit">Submit</button>
+          `;
+          document.getElementById('phone').oninput = (e) => phone = e.target.value;
+          document.getElementById('submit').onclick = () => { step++; render(); };
+        } else if (step === 5) {
+          app.innerHTML = `
+            <h2 class="text-lg font-semibold mb-2">Thank you for booking!</h2>
+            <p>Your appointment is on ${date} at ${selectedTime} with ${selectedStaff}. We'll text you at ${phone}.</p>
+          `;
+        }
+      }
+      render();
+    });
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen p-4">
+  <div id="app" class="max-w-xl mx-auto bg-white shadow-md rounded-lg p-6"></div>
+</body>
+</html>
