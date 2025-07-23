@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Great Nails & Hair Login</title>
+  <link rel="stylesheet" href="/ttgreatnail/cssFiles/loginsignup.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
+</head>
+<body class="page-body">
+      <section class="top-nav">
+  <div class="left-side">
+    <div class="header-logo">
+      <img src="/ttgreatnail/assets/greatNailsLogo.png" alt="Great Nails" width="40" height="40" />
+      <span class="brand-name">Great Nails & Hair</span>
+    </div>
+  </div>
+
+  <div class="right-side">
+    <input id="menu-toggle" type="checkbox" />
+        <label class="menu-button-container" for="menu-toggle">
+          <div class="menu-button"></div>
+        </label>
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Appointments</a></li>
+    </ul>
+    <span class="address">440 Great Mall Dr Milpitas, Entrance #5</span>
+    <img src="https://www.svgrepo.com/show/452229/instagram-1.svg" class="social-icon" alt="Instagram" />
+    <img src="https://www.svgrepo.com/show/452196/facebook-1.svg" class="social-icon" alt="Facebook" />
+  </div>
+</section>
+  
+
+  <div class="main-container">
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="title login">Login Form</div>
+        <div class="title signup">Signup Form</div>
+      </div>
+
+      <div class="form-container">
+        <div class="slide-controls">
+          <input type="radio" name="slide" id="login" checked>
+          <input type="radio" name="slide" id="signup">
+          <label for="login" class="slide login">Login</label>
+          <label for="signup" class="slide signup">Signup</label>
+          <div class="slider-tab"></div>
+        </div>
+
+        <div class="form-inner">
+          <form action="#" class="login">
+            <div class="field">
+              <input type="text" placeholder="Email Address" required>
+            </div>
+            <div class="field">
+              <input type="text" placeholder="Phone Number" required>
+            </div>
+            <div class="field">
+              <input type="password" placeholder="Password" required>
+            </div>
+            <div class="pass-link"><a href="#">Forgot password?</a></div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login">
+            </div>
+          </form>
+
+          <form action="#" class="signup">
+            <div class="field">
+              <input type="text" placeholder="Email Address" required>
+            </div>
+            <div class="field">
+              <input type="text" placeholder="Phone Number" required>
+            </div>
+            <div class="field">
+              <input type="password" placeholder="Password" required>
+            </div>
+            <div class="field">
+              <input type="password" placeholder="Confirm password" required>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Signup">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load JS at the end for best performance -->
+  <script src="loginsignup.js"></script>
+</body>
+</html>

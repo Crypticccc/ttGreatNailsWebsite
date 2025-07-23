@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Top Nav Bar -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Great Nails & Hair Login</title>
+  <link rel="stylesheet" href="/ttgreatnail/cssFiles/loginsignup.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
+  
+</head>
+<body class="page-body">
+      <section class="top-nav">
+  <div class="left-side">
+    
+    <div class="header-logo">
+      <img src="/ttgreatnail/assets/greatNailsLogo.png" alt="Great Nails" width="40" height="40" />
+      <span class="brand-name">Great Nails & Hair</span>
+    </div>  
+    <input id="menu-toggle" type="checkbox" />
+        <label class="menu-button-container" for="menu-toggle">
+          <div class="menu-button"></div>
+        </label>
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Appointments</a></li>
+    </ul>
+  </div>
+  <div class="right-side">
+    <span class="address">440 Great Mall Dr Milpitas, Entrance #5</span>
+    <img src="https://www.svgrepo.com/show/452229/instagram-1.svg" class="social-icon" alt="Instagram" />
+    <img src="https://www.svgrepo.com/show/452196/facebook-1.svg" class="social-icon" alt="Facebook" />
+  </div>
+</section>
+  
+  <!-- Main Content --> 
+  <main id="wrapper">
+  <div class="container">
+    <form action="#" id="appoint-form" method="POST">
+      <h1 id="form-head">Book Your Appointment</h1>
+      <label for="typeSelection" id="apptType" class="format">Select a Service! </label>
+    <div id="dropdown-container">
+      <select id="dropdown">
+        <option value="apptType" disabled selected>Select Here! </option>
+        <option value="hair">Hair </option>
+        <option value="facial">Facial </option>
+        <option value="nail">Nail </option>
+        <option value="waxing">Waxing </option>
+        <option value="microblading">Microblading </option>
+        <option value="massage">Massage </option>
+        <option value="eyelashes">Eyelashes </option>
+      </select>
+      <button
+            type="button"
+            class="material-symbols-outlined"
+            id="add-btn"
+            style="
+            display:inline; 
+            background: rgb(221, 221, 255); 
+            border: none; 
+            border-radius: 5px; 
+            color: rgb(0, 0, 173); 
+            font-size: 1.2rem; 
+            padding: 8px 10px;
+            cursor: pointer;"
+          >
+            &plus;
+          </button>
+      <div style="display: flex; align-items: center; gap: 8px;">
+          
+    </div>
+    <div class="dropdown-container">
+        <script>
+        const dropdownHTML = `
+          <div class="extra-dropdown" style="display: flex; align-items: center; margin-top: 8px;">
+            <select class="dropdown">
+              <option value="apptType" disabled selected>Select Here! </option>
+              <option value="hair">Hair </option>
+              <option value="facial">Facial </option>
+              <option value="nail">Nail </option>
+              <option value="waxing">Waxing </option>
+              <option value="microblading">Microblading </option>
+              <option value="massage">Massage </option>
+              <option value="eyelashes">Eyelashes </option>
+            </select>
+            <button type="button" class="remove-btn" title="Remove" style="margin-left: 8px; background: #ffdddd; border: none; border-radius: 5px; color: #900; font-size: 1.2rem; padding: 2px 10px; cursor: pointer;">&minus;</button>
+          </div>
+        `;
+
+        document.getElementById('add-btn').addEventListener('click', function() {
+          const container = document.getElementById('dropdown-container');
+          const temp = document.createElement('div');
+          temp.innerHTML = dropdownHTML;
+          const newDropdown = temp.firstElementChild;
+          newDropdown.querySelector('.remove-btn').onclick = function() {
+            newDropdown.remove();
+          };
+          container.appendChild(newDropdown);
+        });
+      </script>
+      </div>
+      </div>
+      
+      <label for="dateandtime" id="date-time" class="format">SELECT DATE AND TIME </label>
+      <input type="date" id="date" name="date" class="dtt"  required>
+      <input type="time" id="time" name="utime" min="10:00" max="21:00" value="10:00" class="dtt" required>
+      <small id="note">(Note: Booking hours are 10am to 9pm)</small>
+      <label for="personal details" id="p-details" class="format">PERSONAL DETAILS</label>
+      <input type="text" id="name" class="person-detail" placeholder="Full name*" name="uname" maxlength="20" required>
+      <input type="tel" id="mobile" class="person-detail" name="ucontact" placeholder="Mobile number*" maxlength="10" required>
+      <input type="email" placeholder="Email" id="email" class="person-detail" name="uemail" required>
+      <textarea id="message" name="umessage" rows="5" cols="3" placeholder="Any other requests?" class="person-detail"></textarea>
+      <button type="submit" id="submit" value="Submit" onclick="">Submit </button>
+ 
+    </form>
+  </div>
+</main>
+  <!-- Load JS at the end for best performance -->
+  <script src="bookAppt.js"></script>
+</body>
+</html>
