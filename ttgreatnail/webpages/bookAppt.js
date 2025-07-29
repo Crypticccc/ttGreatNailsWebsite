@@ -533,3 +533,33 @@ app.directive('datePicker', function ($timeout, $window) {
         }
     };
 });
+// Appointment form submission
+document.getElementById("appoint-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const serviceEls = document.querySelectorAll("#dropdown-container select, .extra-dropdown select");
+  const services = Array.from(serviceEls).map(s => s.value).filter(v => v && v !== "apptType");
+  const payload = {
+    services,
+    date: document.getElementById("date").value,
+    time: document.getElementById("time").value,
+    name: document.getElementById("name").value,
+    ucontact: document.getElementById("mobile").value,
+    uemail: document.getElementById("email").value,
+    message: document.getElementById("message").value
+  };
+  try {
+    const res = await fetch("/api/book", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      alert("Appointment booked!");
+    } else {
+      alert("Failed to book appointment");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error booking appointment");
+  }
+});
